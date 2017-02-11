@@ -2,7 +2,6 @@ C:\Users\jeffc\AppData\Local\Temporary Projects\Snake\bin\Debug\Snake.exe.config
 C:\Users\jeffc\OneDrive\Documents\Visual Studio 2015\Projects\Snake\Snake\bin\Debug\Snake.exe.config
 C:\Users\jeffc\OneDrive\Documents\Visual Studio 2015\Projects\Snake\Snake\bin\Debug\Snake.exe
 C:\Users\jeffc\OneDrive\Documents\Visual Studio 2015\Projects\Snake\Snake\bin\Debug\Snake.pdb
-C:\Users\jeffc\OneDrive\Documents\Visual Studio 2015\Projects\Snake\Snake\obj\Debug\Snake.csprojResolveAssemblyReference.cache
 C:\Users\jeffc\OneDrive\Documents\Visual Studio 2015\Projects\Snake\Snake\obj\Debug\Snake.frmGame.resources
 C:\Users\jeffc\OneDrive\Documents\Visual Studio 2015\Projects\Snake\Snake\obj\Debug\Snake.Properties.Resources.resources
 C:\Users\jeffc\OneDrive\Documents\Visual Studio 2015\Projects\Snake\Snake\obj\Debug\Snake.csproj.GenerateResource.Cache

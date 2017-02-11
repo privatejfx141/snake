@@ -27,17 +27,21 @@ namespace Snake
         public static int points { get; set; }
         // determines if game will end.
         public static bool gameOver { get; set; }
+        // number of seconds, how long the game lasted.
+        public static int duration { get; set; }
         // directions for snake movement.
         public static Direction direction { get; set; }
 
         public Settings()
         {
-            width = 16;
-            height = 16;
+            duration = 0;
+            width = 12;
+            height = 12;
             speed = 16;
             score = 0;
+            points = 10;
             gameOver = false;
-            direction = Direction.Down;
+            direction = Direction.Right;
         }
     }
 }

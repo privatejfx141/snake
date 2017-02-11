@@ -39,9 +39,12 @@
             this.picCanvas = new System.Windows.Forms.PictureBox();
             this.lblLScore = new System.Windows.Forms.Label();
             this.lblScore = new System.Windows.Forms.Label();
-            this.tmrTimer = new System.Windows.Forms.Timer(this.components);
+            this.tmrGameSpeed = new System.Windows.Forms.Timer(this.components);
             this.lblGameOver = new System.Windows.Forms.Label();
             this.btnPlay = new System.Windows.Forms.Button();
+            this.lblTimer = new System.Windows.Forms.Label();
+            this.tmrTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnExit = new System.Windows.Forms.Button();
             this.mnuMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +70,7 @@
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             resources.ApplyResources(this.newGameToolStripMenuItem, "newGameToolStripMenuItem");
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -85,6 +89,7 @@
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // picCanvas
             // 
@@ -116,18 +121,33 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
+            // lblTimer
+            // 
+            resources.ApplyResources(this.lblTimer, "lblTimer");
+            this.lblTimer.Name = "lblTimer";
+            // 
+            // btnExit
+            // 
+            resources.ApplyResources(this.btnExit, "btnExit");
+            this.btnExit.Name = "btnExit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // frmGame
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnPlay);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblGameOver);
+            this.Controls.Add(this.lblTimer);
+            this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.lblLScore);
             this.Controls.Add(this.picCanvas);
             this.Controls.Add(this.mnuMenu);
             this.KeyPreview = true;
             this.MainMenuStrip = this.mnuMenu;
+            this.MaximizeBox = false;
             this.Name = "frmGame";
             this.Load += new System.EventHandler(this.frmGame_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGame_KeyDown);
@@ -151,9 +171,12 @@
         private System.Windows.Forms.PictureBox picCanvas;
         private System.Windows.Forms.Label lblLScore;
         private System.Windows.Forms.Label lblScore;
-        private System.Windows.Forms.Timer tmrTimer;
+        private System.Windows.Forms.Timer tmrGameSpeed;
         private System.Windows.Forms.Label lblGameOver;
         private System.Windows.Forms.Button btnPlay;
+        private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.Timer tmrTimer;
+        private System.Windows.Forms.Button btnExit;
     }
 }
 

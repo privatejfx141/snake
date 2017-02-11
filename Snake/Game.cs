@@ -20,24 +20,24 @@ namespace Snake
         public frmGame()
         {
             InitializeComponent();
+        }
+
+        private void startGame()
+        {
+            // disable the controls.
+            lblGameOver.Visible = false;
+            btnPlay.Enabled = false;
+            newGameToolStripMenuItem.Enabled = false;
             // initialize with default settings.
             new Settings();
             // set game timer.
             tmrTimer.Interval = 1000 / Settings.speed;
             tmrTimer.Tick += updateScreen;
             tmrTimer.Start();
-            // start a new game.
-            startGame();
-        }
-
-        private void startGame()
-        {
-            // initialize with default settings.
-            new Settings();
             // remove the whole snake.
             snake.Clear();
             // create the snake head node.
-            Circle snakeHead = new Circle() { x = 10, y = 5 };
+            Circle snakeHead = new Circle() { x = 16, y = 10 };
             // add the head to the body.
             snake.Add(snakeHead);
             lblScore.Text = Settings.score.ToString();
@@ -50,8 +50,8 @@ namespace Snake
         private void generateFood()
         {
             // get the max x and y positions.
-            int maxXPos = picCanvas.Size.Width / Settings.width;
-            int maxYPos = picCanvas.Size.Height / Settings.height;
+            int maxXPos = (picCanvas.Size.Width / Settings.width);
+            int maxYPos = (picCanvas.Size.Height / Settings.height);
 
             // create a random food object.
             Random random = new Random();
@@ -61,12 +61,15 @@ namespace Snake
 
         private void updateScreen(object sender, EventArgs e)
         {
-            // check for Game Over.
+            // check for game over.
             if (Settings.gameOver) {
                 // check if Enter is pressed.
                 if (Input.KeyPressed(Keys.Return)) { startGame(); }
             }
             else {
+
+                Settings.duration += 1;
+
                 if (Input.KeyPressed(Keys.D) && Settings.direction != Direction.Left)
                     Settings.direction = Direction.Right;
                 else if (Input.KeyPressed(Keys.A) && Settings.direction != Direction.Right)
@@ -77,6 +80,8 @@ namespace Snake
                     Settings.direction = Direction.Down;
 
                 movePlayer();
+                lblTimer.Text = TimeSpan.FromSeconds(Settings.duration / Settings.speed).ToString();
+                lblScore.Text = Settings.score.ToString();
             }
 
             picCanvas.Refresh();
@@ -93,8 +98,9 @@ namespace Snake
 
             if (Settings.gameOver)
             {
-                string gameOver = "Game over \n Final score is: " + Settings.score;
-                lblGameOver.Text = gameOver;
+                string msg = "Game Over!\nYour final score is: " + Settings.score + ".";
+                msg += "\nPress 'Enter' to play again.";
+                lblGameOver.Text = msg;
                 lblGameOver.Visible = true;
             }
             else
@@ -146,11 +152,11 @@ namespace Snake
                             break;
                     }
                     // get max X and Y positions.
-                    int maxXPos = picCanvas.Size.Width / Settings.width;
-                    int maxYPos = picCanvas.Size.Height / Settings.height;
+                    int maxXPos = (picCanvas.Size.Width / Settings.width);
+                    int maxYPos = (picCanvas.Size.Height / Settings.height);
                     // detect collision with game boundaries.
                     if (snake[i].x < 0 || snake[i].y < 0 
-                        || snake[i].x > maxXPos || snake[i].y > maxYPos) {
+                        || snake[i].x >= maxXPos || snake[i].y >= maxYPos) {
                         die();
                     }
                     // detect collision with body.
@@ -190,6 +196,9 @@ namespace Snake
         private void die()
         {
             Settings.gameOver = true;
+            tmrTimer.Tick -= updateScreen;
+            tmrTimer.Stop();
+            btnPlay.Enabled = true;
         }
 
         private void frmGame_KeyDown(object sender, KeyEventArgs e)
@@ -206,12 +215,32 @@ namespace Snake
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-
+            Focus();
+            startGame();
         }
 
         private void frmGame_Load(object sender, EventArgs e)
         {
+            btnPlay.Text = "Play Game";
+            tmrTimer.Enabled = false;
+        }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string msg = "This C# implementation of Snake was developed by Jeffrey Li, ";
+            msg += "from December 29, 2016 to Feburary 11, 2017.";
+            msg += "\nCoded in C# in Visual Studio 2015.";
+            MessageBox.Show(msg, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnPlay_Click(sender, e);
         }
     }
 }
